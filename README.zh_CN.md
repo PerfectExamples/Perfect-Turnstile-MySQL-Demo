@@ -1,4 +1,4 @@
-# Perfect Turnstile with MySQL [简体中文](README.zh_CN.md)
+# 使用 MySQL 的 Perfect Turnstile 认证层 [English](README.md)
 
 <p align="center">
     <a href="http://perfect.org/get-involved.html" target="_blank">
@@ -39,78 +39,75 @@
     </a>
 </p>
 
+该示例程序展示了使用 MySQL ORM 时集成 Stormpath 开发的 Turnstile 认证系统。
 
-This example demonstrates the integration Stormpath's Turnstile authentication system with Perfect and a MySQL ORM.
+该认证库可以在 [https://github.com/PerfectlySoft/Perfect-Turnstile-MySQL](https://github.com/PerfectlySoft/Perfect-Turnstile-MySQL) 找到。
 
-The library can be found at [https://github.com/PerfectlySoft/Perfect-Turnstile-MySQL](https://github.com/PerfectlySoft/Perfect-Turnstile-MySQL)
+该包作为 [Perfect](https://github.com/PerfectlySoft/Perfect) 项目的一部分，可以通过 Swift 包管理器进行编译。
 
-This package builds with Swift Package Manager and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project.
+编译前请确保安装了 Xcode 8.0 或以上版本。
 
-Ensure you have installed Xcode 8.0 or later.
-
-## Build Notes
+## 编译事项
 
 ### macOS
 
-Requires the use of Homebrew’s MySQL.
+使用 Homebrew 包管理器安装 MySQL。
 
 ```
 brew install mysql
 ```
 
-If you need Homebrew, you can install it with:
+若未安装 Homebrew，请使用下面命令进行安装：
 
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Unfortunately, at this point in time you will need to edit the mysqlclient.pc file located here:
+安装完 MySQL 后需要编辑 mysqlclient.pc 文件，该文件在下面的路径中：
 
 ```
 /usr/local/lib/pkgconfig/mysqlclient.pc
 ```
 
-Remove the occurrence of "-fno-omit-frame-pointer". This file is read-only by default so you will need to change that first.
+移除该文件中的 "fno-omit-frame-pointer" 项。该文件默认是只读的，所以在编辑前请先对该文件的读写权限进行修改。
 
 ### Linux
 
-Ensure that you have installed libmysqlclient-dev for MySQL version 5.6 or greater:
+确保您为 MySQL 5.6 或更高版本安装了 libmysqlclient-dev：
 
 ```
 sudo apt-get install libmysqlclient-dev
 ```
 
-Please note that Ubuntu 14 defaults to including a version of MySQL client which will not compile with this package. Install MySQL client version 5.6 or greater manually.
+注意：Ubuntu 14 默认安装了无法成功编译的 MySQL 客户端。请手动安装 MySQL 5.6 或更高版本。
 
+## 设置 - Xcode 8
 
-## Setup - Xcode 8
-
-* Check out or download the project;
-* In terminal, navigate to the directory and execute
+* 检出或下载该项目；
+* 切换目录到项目根目录中并执行下面的命令
 
 ```
 swift package generate-xcodeproj
 ```
 
-* Open `PerfectTurnstile MySQL Demo.xcodeproj`
+* 打开 `PerfectTurnstile MySQL Demo.xcodeproj`
 
-To run this project from Xcode, edit the Scheme, Under "Options" for "run", check "Use custom working directory" and choose the project's working directory. After doing this, the project can be run from within Xcode.
+为了从 Xcode 中运行该项目，请编辑项目的 Scheme，"Options" 选择 "run"，选中 "Use custom working directory" 并选择该项目的工作目录。做完这些设置后，该项目就可以从 Xcode 中运行了。
 
-## Setup - Terminal
+## 设置 - 终端
 
-* Check out or download the project;
-* In terminal, navigate to the directory 
-* Execute `swift build`
-* Once the project has compiled, execute `./.build/debug/PerfectTurnstile MySQL Demo`
+* 检出或下载该项目；
+* 切换目录到项目根目录中
+* 执行 `swift build`
+* 编译完成后，执行 `./.build/debug/PerfectTurnstile MySQL Demo`
 
 ```
 [INFO] Starting HTTP server on 0.0.0.0:8181 with document root ./webroot
 ```
 
+### JSON 路由
 
-## Included JSON Routes
-
-The framework includes certain basic routes:
+该框架包含了几个基本的路由：
 
 ```
 POST /api/v1/login (with username & password form elements)
@@ -118,9 +115,9 @@ POST /api/v1/register (with username & password form elements)
 GET /api/v1/logout
 ```
 
-## Included Routes for Browser
+### 浏览器路由
 
-The following routes are available for browser testing:
+下面的路由可用于浏览器测试：
 
 ```
 http://localhost:8181
@@ -128,5 +125,4 @@ http://localhost:8181/login
 http://localhost:8181/register
 ```
 
-These routes are using Mustache files in the webroot directory.
-
+这些路由在 webroot 目录中使用了 Mustache 模板文件。
